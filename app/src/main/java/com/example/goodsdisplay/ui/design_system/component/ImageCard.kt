@@ -29,6 +29,7 @@ import com.example.goodsdisplay.ui.design_system.theme.White
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ImageCard(
+    modifier: Modifier = Modifier,
     imageUrl: String,
     title: String,
     body: String,
@@ -37,7 +38,7 @@ fun ImageCard(
     indicator: (@Composable () -> Unit)? = null,
     indicatorAlignment: Alignment = Alignment.BottomStart,
 ) {
-    Column(Modifier.background(White)) {
+    Column(modifier.background(White)) {
         // Image + Indicator
         Box(Modifier.fillMaxWidth()) {
             AsyncImage(

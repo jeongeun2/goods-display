@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GoodsDisplay</string>
+    <string name="all">전체</string>
+    <string name="coupon">쿠폰</string>
 </resources>

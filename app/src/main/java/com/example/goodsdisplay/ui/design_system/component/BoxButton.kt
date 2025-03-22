@@ -56,7 +56,7 @@ fun BoxButton(
             OutlinedButton(
                 onClick = onClick,
                 modifier = buttonModifier,
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = Gray800),
+                colors = ButtonDefaults.outlinedButtonColors(containerColor = White, contentColor = Gray800),
                 border = BorderStroke(width = 1.dp, color = Gray400)
             ) {
                 ButtonContent(text, icon, iconPosition)
@@ -82,7 +82,7 @@ private fun ButtonContent(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview(showBackground = true)
 @Composable
 private fun OutlineBoxButtonPreview() {
     BoxButton(
