@@ -16,7 +16,7 @@ data class Data(
 
 @JsonClass(generateAdapter = true)
 data class ContentsDto(
-    val type: String,
+    val type: ContentsType,
     val banners: List<BannerDto>?,
     val goods: List<GoodsDto>?,
     val styles: List<StyleDto>?,
@@ -31,7 +31,7 @@ data class HeaderDto(
 
 @JsonClass(generateAdapter = true)
 data class FooterDto(
-    val type: String,
+    val type: FooterType,
     val title: String,
     val iconURL: String?,
 )

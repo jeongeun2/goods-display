@@ -1,6 +1,7 @@
 package com.example.goodsdisplay.data.di
 
 import android.util.Log
+import com.example.goodsdisplay.data.adapter.ResponseCallAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -46,6 +47,7 @@ object RetrofitModule {
                     Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
                 )
             )
+            .addCallAdapterFactory(ResponseCallAdapter.Factory())
             .build()
     }
 }

@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 interface ContentsService {
     @GET("interview/list.json")
-    suspend fun getContents(): ContentsResponse
+    suspend fun getContents(): Result<ContentsResponse>
 }
 
 @Module
