@@ -6,4 +6,5 @@ import javax.inject.Inject
 class ContentsRepository @Inject constructor(
     private val contentsService: ContentsService,
 ) {
+    suspend fun getContents() = contentsService.getContents()
 }
