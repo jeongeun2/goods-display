@@ -4,11 +4,16 @@ import com.example.goodsdisplay.data.model.ContentsDto
 import com.example.goodsdisplay.data.model.ContentsResponse
 import com.example.goodsdisplay.data.model.Data
 import com.example.goodsdisplay.data.model.FooterType
+import com.example.goodsdisplay.domain.PriceFormatUseCase
+import com.example.goodsdisplay.domain.SaleRateFormatUseCase
 import com.example.goodsdisplay.ui.home.model.HomeUiState.Error
 import com.example.goodsdisplay.ui.home.model.HomeUiState.Success
 import javax.inject.Inject
 
-class HomeUiStateMapper @Inject constructor() {
+class HomeUiStateMapper @Inject constructor(
+    private val priceFormatUseCase: PriceFormatUseCase,
+    private val saleRateFormatUseCase: SaleRateFormatUseCase,
+) {
     fun toUiState(result: Result<ContentsResponse>): HomeUiState =
         result.getOrNull()?.let { response ->
             Success(response.data.mapIndexed { index, data -> data.toUiModel(index) })
@@ -48,8 +53,8 @@ class HomeUiStateMapper @Inject constructor() {
             Content.Goods(
                 imageUrl = it.thumbnailURL,
                 brand = it.brandName,
-                price = it.price.toString(), // TODO formatting
-                saleRate = it.saleRate.toString(), // TODO formatting
+                price = priceFormatUseCase(it.price),
+                saleRate = saleRateFormatUseCase(it.saleRate),
                 visibleCoupon = it.hasCoupon,
             )
         } ?: styles?.map {
