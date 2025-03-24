@@ -6,8 +6,8 @@ import com.example.goodsdisplay.ui.design_system.component.ImageCard
 import com.example.goodsdisplay.ui.home.model.Content
 
 @Composable
-fun GoodsVerticalGrid(goods: List<Content.Goods>) {
-    VerticalGrid(items = goods) { item ->
+fun GoodsVerticalGrid(goods: List<Content.Goods>, columns: Int) {
+    VerticalGrid(items = goods, columns = columns) { item ->
         ImageCard(
             imageUrl = item.imageUrl,
             title = item.brand,
@@ -39,6 +39,7 @@ private fun GoodsVerticalGridPreview() {
             goods,
             goods,
             goods.copy(visibleCoupon = true),
-        )
+        ),
+        columns = 3,
     )
 }

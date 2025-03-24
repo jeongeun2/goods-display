@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.goodsdisplay.data.model.FooterType
 import com.example.goodsdisplay.ui.design_system.component.LoadingIndicator
 import com.example.goodsdisplay.ui.home.component.ContentsLayout
 import com.example.goodsdisplay.ui.home.component.ErrorContent
@@ -27,6 +28,7 @@ fun HomeScreen(
         is HomeUiState.Success -> ContentsContent(
             modifier = modifier,
             contents = (uiState as HomeUiState.Success).contents,
+            onClickFooter = viewModel::onClickFooter
         )
 
         is HomeUiState.Error -> ErrorContent(onRetry = viewModel::loadContents)
@@ -37,6 +39,7 @@ fun HomeScreen(
 private fun ContentsContent(
     modifier: Modifier,
     contents: List<ContentsUiModel>,
+    onClickFooter: (id: Int, type: FooterType) -> Unit,
 ) {
     val scrollState = rememberScrollState()
 
@@ -48,7 +51,7 @@ private fun ContentsContent(
         contents.forEach { contentsUiModel ->
             ContentsLayout(
                 contentsUiModel = contentsUiModel,
-                onClickFooter = {/* TODO click event */ },
+                onClickFooter = onClickFooter,
             )
         }
     }

@@ -4,6 +4,7 @@ import com.example.goodsdisplay.data.model.ContentsType
 import com.example.goodsdisplay.data.model.FooterType
 
 data class ContentsUiModel(
+    val id: Int,
     val header: Header?,
     val type: ContentsType,
     val contents: List<Content>,

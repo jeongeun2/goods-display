@@ -3,6 +3,7 @@ package com.example.goodsdisplay.ui.home.model
 import com.example.goodsdisplay.data.model.ContentsDto
 import com.example.goodsdisplay.data.model.ContentsResponse
 import com.example.goodsdisplay.data.model.Data
+import com.example.goodsdisplay.data.model.FooterType
 import com.example.goodsdisplay.ui.home.model.HomeUiState.Error
 import com.example.goodsdisplay.ui.home.model.HomeUiState.Success
 import javax.inject.Inject
@@ -10,11 +11,21 @@ import javax.inject.Inject
 class HomeUiStateMapper @Inject constructor() {
     fun toUiState(result: Result<ContentsResponse>): HomeUiState =
         result.getOrNull()?.let { response ->
-            Success(response.data.map { it.toUiModel() })
+            Success(response.data.mapIndexed { index, data -> data.toUiModel(index) })
         } ?: Error
 
-    private fun Data.toUiModel(): ContentsUiModel =
+    fun toUiStateWithInitialLimit(contentsUiModels: List<ContentsUiModel>): HomeUiState =
+        Success(contentsUiModels.map {
+            if (it.footer?.type == FooterType.MORE) {
+                it.copy(contents = it.contents.take(it.type.columns * INITIAL_GRID_ROWS))
+            } else {
+                it
+            }
+        })
+
+    private fun Data.toUiModel(id: Int): ContentsUiModel =
         ContentsUiModel(
+            id = id,
             header = header?.let {
                 Header(it.title, it.iconURL, it.linkURL)
             },
@@ -44,4 +55,8 @@ class HomeUiStateMapper @Inject constructor() {
         } ?: styles?.map {
             Content.Style(imageUrl = it.thumbnailURL, linkUrl = it.linkURL)
         } ?: emptyList()
+
+    companion object {
+        private const val INITIAL_GRID_ROWS = 2
+    }
 }

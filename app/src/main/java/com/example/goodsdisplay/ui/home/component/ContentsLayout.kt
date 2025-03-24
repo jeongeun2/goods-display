@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.goodsdisplay.R
 import com.example.goodsdisplay.data.model.ContentsType
+import com.example.goodsdisplay.data.model.FooterType
 import com.example.goodsdisplay.ui.design_system.component.BoxButton
 import com.example.goodsdisplay.ui.design_system.component.Header
 import com.example.goodsdisplay.ui.design_system.component.TextButton
@@ -21,7 +22,7 @@ import com.example.goodsdisplay.ui.home.model.Header
 @Composable
 fun ContentsLayout(
     contentsUiModel: ContentsUiModel,
-    onClickFooter: () -> Unit,
+    onClickFooter: (id: Int, type: FooterType) -> Unit,
 ) {
     Column {
         // Header
@@ -34,7 +35,10 @@ fun ContentsLayout(
             }
 
             ContentsType.GRID -> {
-                GoodsVerticalGrid(contentsUiModel.contents.filterIsInstance<Content.Goods>())
+                GoodsVerticalGrid(
+                    goods = contentsUiModel.contents.filterIsInstance<Content.Goods>(),
+                    columns = contentsUiModel.type.columns,
+                )
             }
 
             ContentsType.SCROLL -> {
@@ -42,13 +46,19 @@ fun ContentsLayout(
             }
 
             ContentsType.STYLE -> {
-                StylesVerticalGrid(contentsUiModel.contents.filterIsInstance<Content.Style>())
+                StylesVerticalGrid(
+                    styles = contentsUiModel.contents.filterIsInstance<Content.Style>(),
+                    columns = contentsUiModel.type.columns,
+                )
             }
         }
 
         // Footer
         contentsUiModel.footer?.let {
-            ContentsFooter(footer = it, onClickFooter = onClickFooter)
+            ContentsFooter(
+                footer = it,
+                onClickFooter = { onClickFooter(contentsUiModel.id, it.type) },
+            )
         }
     }
 }
