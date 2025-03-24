@@ -24,7 +24,8 @@ class HomeViewModel @Inject constructor(
         loadContents()
     }
 
-    private fun loadContents() {
+    fun loadContents() {
+        _uiState.update { HomeUiState.Loading }
         viewModelScope.launch {
             _uiState.update {
                 homeUiStateMapper.toUiState(homeRepository.getContents())

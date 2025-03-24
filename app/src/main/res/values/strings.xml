@@ -2,4 +2,6 @@
     <string name="app_name">GoodsDisplay</string>
     <string name="all">전체</string>
     <string name="coupon">쿠폰</string>
+    <string name="error_message">문제가 발생했습니다.</string>
+    <string name="retry">재시도</string>
 </resources>

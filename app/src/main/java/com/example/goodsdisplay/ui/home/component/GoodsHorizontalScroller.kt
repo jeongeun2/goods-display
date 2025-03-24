@@ -3,7 +3,7 @@ package com.example.goodsdisplay.ui.home.component
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,7 +16,7 @@ fun GoodsHorizontalScroller(goods: List<Content.Goods>) {
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
     ) {
-        itemsIndexed(goods) { _, goods ->
+        items(goods) { goods ->
             ImageCard(
                 modifier = Modifier.width(150.dp),
                 imageUrl = goods.imageUrl,

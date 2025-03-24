@@ -31,14 +31,14 @@ enum class BoxButtonIconPosition {
 
 @Composable
 fun BoxButton(
+    modifier: Modifier = Modifier,
     text: String,
     onClick: () -> Unit = {},
     buttonStyle: BoxButtonStyle = BoxButtonStyle.Outline,
     icon: (@Composable () -> Unit)? = null,
     iconPosition: BoxButtonIconPosition = BoxButtonIconPosition.Start,
 ) {
-    val buttonModifier = Modifier
-        .fillMaxWidth()
+    val buttonModifier = modifier
         .heightIn(min = 54.dp)
 
     when (buttonStyle) {

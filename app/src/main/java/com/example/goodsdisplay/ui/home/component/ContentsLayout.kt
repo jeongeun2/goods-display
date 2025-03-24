@@ -1,9 +1,7 @@
 package com.example.goodsdisplay.ui.home.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -47,12 +45,10 @@ fun ContentsLayout(
                 StylesVerticalGrid(contentsUiModel.contents.filterIsInstance<Content.Style>())
             }
         }
-        Spacer(Modifier.height(16.dp))
 
         // Footer
         contentsUiModel.footer?.let {
             ContentsFooter(footer = it, onClickFooter = onClickFooter)
-            Spacer(Modifier.height(16.dp))
         }
     }
 }
@@ -72,13 +68,14 @@ private fun ContentsHeader(header: Header) {
 
 @Composable
 private fun ContentsFooter(footer: Footer, onClickFooter: () -> Unit) {
-    Box(Modifier.padding(horizontal = 16.dp)) {
-        BoxButton(
-            text = footer.title,
-            onClick = onClickFooter,
-            icon = footer.iconUrl?.let { iconUrl ->
-                { AsyncImage(model = iconUrl, contentDescription = "Icon") }
-            },
-        )
-    }
+    BoxButton(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        text = footer.title,
+        onClick = onClickFooter,
+        icon = footer.iconUrl?.let { iconUrl ->
+            { AsyncImage(model = iconUrl, contentDescription = "Icon") }
+        },
+    )
 }

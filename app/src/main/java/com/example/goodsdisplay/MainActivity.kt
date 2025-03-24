@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.goodsdisplay.ui.design_system.theme.GoodsDisplayTheme
+import com.example.goodsdisplay.ui.design_system.theme.White
 import com.example.goodsdisplay.ui.home.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,8 +20,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GoodsDisplayTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    containerColor = White
+                ) { innerPadding ->
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

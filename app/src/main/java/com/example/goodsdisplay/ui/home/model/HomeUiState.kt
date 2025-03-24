@@ -5,5 +5,5 @@ sealed class HomeUiState {
 
     data class Success(val contents: List<ContentsUiModel>) : HomeUiState()
 
-    data class Error(val message: String) : HomeUiState()
+    data object Error : HomeUiState()
 }

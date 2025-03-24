@@ -11,7 +11,7 @@ class HomeUiStateMapper @Inject constructor() {
     fun toUiState(result: Result<ContentsResponse>): HomeUiState =
         result.getOrNull()?.let { response ->
             Success(response.data.map { it.toUiModel() })
-        } ?: Error("문제가 발생했습니다.")
+        } ?: Error
 
     private fun Data.toUiModel(): ContentsUiModel =
         ContentsUiModel(

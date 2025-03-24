@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.moshi.kotlin)
+    implementation(libs.lifecycle.runtime.compose)
     kapt(libs.hilt.compiler)
 
     testImplementation(libs.junit)
