@@ -18,6 +18,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_API_URL", "\"https://meta.musinsa.com/\"")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {

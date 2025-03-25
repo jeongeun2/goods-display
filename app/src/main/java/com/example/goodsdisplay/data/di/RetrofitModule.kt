@@ -1,6 +1,7 @@
 package com.example.goodsdisplay.data.di
 
 import android.util.Log
+import com.example.goodsdisplay.BuildConfig
 import com.example.goodsdisplay.data.adapter.ResponseCallAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -40,7 +41,7 @@ object RetrofitModule {
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://meta.musinsa.com/")
+            .baseUrl(BuildConfig.BASE_API_URL)
             .client(okHttpClient)
             .addConverterFactory(
                 MoshiConverterFactory.create(
