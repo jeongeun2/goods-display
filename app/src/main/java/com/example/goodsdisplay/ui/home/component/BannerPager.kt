@@ -12,6 +12,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.ColorPainter
@@ -24,13 +25,25 @@ import com.example.goodsdisplay.ui.design_system.theme.Gray800
 import com.example.goodsdisplay.ui.design_system.theme.Typography
 import com.example.goodsdisplay.ui.design_system.theme.White
 import com.example.goodsdisplay.ui.home.model.Content
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun BannerPager(banners: List<Content.Banner>) {
+fun BannerPager(
+    banners: List<Content.Banner>,
+    autoScroll: Boolean = true,
+    autoScrollInterval: Long = 3000L
+) {
     Box {
         val pagerState = rememberPagerState(pageCount = { banners.size })
 
+        LaunchedEffect(Unit) {
+            while (autoScroll) {
+                delay(autoScrollInterval)
+                val nextPage = (pagerState.currentPage + 1) % banners.size
+                pagerState.animateScrollToPage(nextPage)
+            }
+        }
         // Pager
         HorizontalPager(
             state = pagerState,
